@@ -1,6 +1,8 @@
 
 const express = require('express');
 
+const app = express();
+
 const bodyParser = require('body-parser');
 
 const path = require('path');
@@ -11,8 +13,7 @@ const sauceRoutes = require('./routes/sauce');
 
 const userRoutes = require('./routes/user');
 
-const app = express();
-
+//MongoDB access
 mongoose.connect('mongodb+srv://cadetCoder:bhQOa66y3q6lO1OF@cluster0-havww.mongodb.net/test?retryWrites=true&w=majority')
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas!');
@@ -31,14 +32,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('api/sauces', (req, res, next) => {
+app.use(bodyParser.json());
+
+app.post('/api/sauces', (req, res, next) => {
   console.log(req.body);
   res.status(201).json({
     message: 'Sauce created successfully!'
   });
 });
 
-app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
