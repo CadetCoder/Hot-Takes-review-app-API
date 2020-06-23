@@ -1,21 +1,18 @@
 
 const express = require('express');
 
-const app = express();
-
 const bodyParser = require('body-parser');
 
 const path = require('path');
 
 const mongoose = require('mongoose');
 
-const Sauce = require('.models/sauce');
-
 const sauceRoutes = require('./routes/sauce');
 
 const userRoutes = require('./routes/user');
 
-//MongoDB access
+const app = express();
+
 mongoose.connect('mongodb+srv://cadetCoder:bhQOa66y3q6lO1OF@cluster0-havww.mongodb.net/test?retryWrites=true&w=majority')
   .then(() => {
     console.log('Successfully connected to MongoDB Atlas!');
@@ -34,31 +31,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
-
-app.post('/api/sauces', (req, res, next) => {
-  const sauce = new Sauce({
-    name: req.body.name,
-    manufacturer: req.body.manufacturer,
-    description: req.body.description,
-    mainPepper: req.body.mainPepper,
-    imageUrl: req.body.imageUrl,
-    heat: req.body.heat,
+app.post('api/sauces', (req, res, next) => {
+  console.log(req.body);
+  res.status(201).json({
+    message: 'Sauce created successfully!'
   });
-  sauce.save().then(
-    () => {
-      res.status(201).json({
-        message: 'Post saved successfully!'
-      });
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  );
 });
+
+app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
