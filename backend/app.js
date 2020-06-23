@@ -9,6 +9,8 @@ const path = require('path');
 
 const mongoose = require('mongoose');
 
+const Sauce = require('.models/sauce');
+
 const sauceRoutes = require('./routes/sauce');
 
 const userRoutes = require('./routes/user');
@@ -35,12 +37,28 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.post('/api/sauces', (req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: 'Sauce created successfully!'
+  const sauce = new Sauce({
+    name: req.body.name,
+    manufacturer: req.body.manufacturer,
+    description: req.body.description,
+    mainPepper: req.body.mainPepper,
+    imageUrl: req.body.imageUrl,
+    heat: req.body.heat,
   });
+  sauce.save().then(
+    () => {
+      res.status(201).json({
+        message: 'Post saved successfully!'
+      });
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
 });
-
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
