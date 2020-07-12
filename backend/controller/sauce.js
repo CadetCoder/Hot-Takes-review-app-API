@@ -1,6 +1,8 @@
 const Sauce = require("../models/sauce");
 const fs = require("fs");
 
+//get() method to only react to GET requests to this endpoint
+
 exports.getSauces = (req, res) => {
   Sauce.find()
     .then((sauces) => {
@@ -10,6 +12,13 @@ exports.getSauces = (req, res) => {
       res.status(400).json({ error: error });
     });
 };
+
+
+//the  findOne()  method on our  Sauce  model to find the single  Sauce  with the same  _id  as the request parameter
+
+//that  Sauce  is then returned in a promise, and sent to the front end
+
+//if no  Sauce  is found or an error occurs, we send a 404 error to the front end, along with the thrown error
 
 exports.getOneSauce = (req, res) => {
   Sauce.findOne({ _id: req.params.id })
@@ -73,6 +82,9 @@ exports.modifyOneSauce = (req, res) => {
       heat: req.body.heat,
     };
   }
+
+  //updateOne()  method on our  Sauce  model, allowing us to update the  Sauce  corresponding to the object we pass as a first argument — here, we use the id parameter passed in the request — and replace it with the  Sauce  passed as a second argument.
+
   Sauce.updateOne({ _id: req.params.id }, sauce)
     .then(() => {
       res.status(201).json({ message: "Sauce updated successfully¡" });

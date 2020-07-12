@@ -1,6 +1,8 @@
+//creating a data schema which contains the fields we want for each Sauce, their type, and whether or not they are a required field
+
 const mongoose = require("mongoose");
 
-const sauceSchema = mongoose.Schema({
+const sauceSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
   manufacturer: { type: String, required: true },
