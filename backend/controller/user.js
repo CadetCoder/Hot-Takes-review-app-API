@@ -35,7 +35,7 @@ exports.login = (req, res, next) => {
             .status(401)
             .json({ error: new Error("Incorrect Password!") });
         }
-        const token = jwt.sign({ userId: user._id }, "TOKEN_TOP_SECRET", { expiresIn: "24h" });
+        const token = jwt.sign({ userId: user._id }, "DPTqwerty-ghjkghjk", { expiresIn: "24h" });
         res.status(200).json({
           userId: user._id,
           token: token
