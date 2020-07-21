@@ -1,3 +1,6 @@
+// MongoDB Name: cadetCoder
+
+// MongoDB Password: bhQOa66y3q6lO1OF
 
 const express = require('express');
 
@@ -38,6 +41,7 @@ app.post('api/sauces', (req, res, next) => {
   });
 });
 
+//convert the body into useable JSON object. Receiving an object from the frontend.
 app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
