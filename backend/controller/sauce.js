@@ -13,7 +13,6 @@ exports.getSauces = (req, res) => {
     });
 };
 
-
 //the  findOne()  method on our  Sauce  model to find the single  Sauce  with the same  _id  as the request parameter
 
 //that  Sauce  is then returned in a promise, and sent to the front end
@@ -121,7 +120,6 @@ exports.likeSauce = (req, res) => {
       if (sauce.usersLiked.includes(req.body.userId)) {
         res.status(400).json({ error: new Error("Invalid operation") });
       } else {
-
         sauce.usersLiked.push(req.body.userId);
         sauce.likes = sauce.likes + 1;
         message = "Sauce liked!";
