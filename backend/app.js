@@ -25,7 +25,7 @@ mongoose.connect('mongodb+srv://cadetCoder:bhQOa66y3q6lO1OF@cluster0-havww.mongo
     console.error(error);
   });
 
-//API route
+// CORS error middleware
 app.use((req, res, next) => {
   // * allows any request from any origin will be allowed to access API
   res.setHeader('Access-Control-Allow-Origin', '*');
