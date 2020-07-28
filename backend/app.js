@@ -19,7 +19,7 @@ const app = express();
 mongoose
   .connect(
     "mongodb+srv://cadetCoder:bhQOa66y3q6lO1OF@cluster0-havww.mongodb.net/test?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
   )
   .then(() => {
     console.log("Successfully connected to MongoDB Atlas!");
