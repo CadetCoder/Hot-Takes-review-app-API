@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("api/sauces", (req, res, next) => {
+app.post("api/sauces", (req, res) => {
   console.log(req.body);
   res.status(201).json({
     message: "Sauce created successfully!",
